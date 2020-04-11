@@ -1,21 +1,28 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import Hello from "./Hello";
 import Post from "./components/Post";
-import "./style.css";
+import "./styles/index.scss";
+import firebase from "./firebase";
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      name: "React"
-    };
-    this.posts = [
-      {
-        title: "Title 1",
-        image: "https://picsum.photos/200/300"
+    this.posts = [];
+    this.getInitData();
+  }
+
+  getInitData =  () => { 
+    let posts = [];
+    const posts_ref = firebase.database().ref('posts');
+    posts_ref.on('value', (snapshot) => {
+      let items = snapshot.val();
+      for(let item in items) {
+        let post = items[item];
+        posts.push(post);
       }
-    ];
+    });
+
+    this.posts = posts;
   }
 
   rendersPosts = () => {
