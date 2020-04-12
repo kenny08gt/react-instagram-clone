@@ -1,12 +1,14 @@
-import firebase from 'firebase'
+import firebase from "firebase";
+import dotenv from "dotenv";
+
 let firebaseConfig = {
-  apiKey: "AIzaSyBAbQHRExvChEGhcpi8eNaZkWHw6QJJk8M",
-  authDomain: "insta-clone-794b5.firebaseapp.com",
-  databaseURL: "https://insta-clone-794b5.firebaseio.com",
-  projectId: "insta-clone-794b5",
-  storageBucket: "insta-clone-794b5.appspot.com",
-  messagingSenderId: "307950994284",
-  appId: "1:307950994284:web:a9e8a8583d956cc5cae949"
-  };
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  databaseURL: process.env.databaseURL,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId
+};
 firebase.initializeApp(firebaseConfig);
-export default firebase; 
+export default firebase;

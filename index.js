@@ -8,34 +8,40 @@ class App extends Component {
   constructor() {
     super();
     this.posts = [];
-    let dateToInsert = (new Date()).getTime();
-    // var post = {title:"Fiat", image:"https://picsum.photos/200/300"}; 
-    //  firebase.database().ref('posts/'+ dateToInsert).set({
-    //             post
-    //         });
+    let dateToInsert = new Date().getTime();
 
     this.getInitData();
   }
 
-  getInitData =  () => { 
+  getInitData = () => {
     let posts = [];
-    const posts_ref = firebase.database().ref('posts');
-    posts_ref.on('value', (snapshot) => {
-      let items = snapshot.val(); 
-      for(let item in items) {
+    const posts_ref = firebase.database().ref("posts");
+    posts_ref.on("value", snapshot => {
+      let items = snapshot.val();
+      for (let item in items) {
         let post = items[item];
         posts.push(post.post);
       }
     });
 
     this.posts = posts;
-  }
+  };
+
+  newPost = () => {
+    var post = { title: "Fiat", image: "https://picsum.photos/200/300" };
+    firebase
+      .database()
+      .ref("posts/" + dateToInsert)
+      .set({
+        post
+      });
+  };
 
   rendersPosts = () => {
     let posts_render = [];
     for (let key in this.posts) {
       let post = this.posts[key];
-      posts_render.push(<Post key={post.id} post={post} />); 
+      posts_render.push(<Post key={post.id} post={post} />);
     }
     return posts_render;
   };
