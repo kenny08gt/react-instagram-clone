@@ -9,7 +9,7 @@ export default class Post extends Component {
   render() {
     return (
       <div class='single-post'>
-        <h2>{this.props.post.title}</h2>
+        <h2>{this.props.post.title}</h2> 
         <img src={this.props.post.image} />
       </div>
     );

@@ -16,6 +16,7 @@ class App extends Component {
     const posts_ref = firebase.database().ref('posts');
     posts_ref.on('value', (snapshot) => {
       let items = snapshot.val();
+      console.log(items);
       for(let item in items) {
         let post = items[item];
         posts.push(post);
