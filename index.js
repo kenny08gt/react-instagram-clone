@@ -3,14 +3,21 @@ import { render } from "react-dom";
 import Post from "./components/Post";
 import "./styles/index.scss";
 import firebase from "./firebase";
+import LoadingOverlay from "react-loading-overlay";
 
 class App extends Component {
   constructor() {
     super();
-    this.posts = [];
+    this.state = {
+      posts: [],
+      loading: false
+    };
   }
 
   getInitData = () => {
+    this.setState({
+      loading: true
+    })
     let posts = [];
     const posts_ref = firebase.database().ref("posts");
     posts_ref.on("value", snapshot => {
@@ -19,14 +26,20 @@ class App extends Component {
         let post = items[item];
         posts.push(post.post);
       }
-      this.forceUpdate();
-    });
 
-    this.posts = posts;
+      this.setState({
+        posts: posts,
+        loading: false
+      });
+    });
   };
 
   newPost = () => {
-    console.log("hey new post!");
+    // console.log("hey new post!");
+    this.setState({
+      loading: true
+    })
+    const that = this;
     const storage = firebase.storage();
     let dateToInsert = new Date().getTime();
     let metadata = {
@@ -34,10 +47,10 @@ class App extends Component {
     };
     // Create a root reference
     var storageRef = storage.ref("posts/" + dateToInsert + ".jpeg");
-    console.log(storageRef);
+    // console.log(storageRef);
 
     this.toDataUrl("https://picsum.photos/200/300", result => {
-      console.log(result);
+      // console.log(result);
       let uploadTask = storageRef.putString(result);
 
       uploadTask.on(
@@ -59,6 +72,9 @@ class App extends Component {
         function(error) {
           // A full list of error codes is available at
           // https://firebase.google.com/docs/storage/web/handle-errors
+          that.setState({
+            loading: false
+          })
           switch (error.code) {
             case "storage/unauthorized":
               // User doesn't have permission to access the object
@@ -86,6 +102,17 @@ class App extends Component {
               .ref("posts/" + dateToInsert)
               .set({
                 post
+              })
+              .then(() => {
+                // that.forceUpdate();
+                let posts = that.state.posts;
+                posts.push(post);
+                // that.setState({
+                //   posts = posts
+                // })
+                that.setState({
+                  loading: false
+                })
               });
           });
         }
@@ -94,13 +121,12 @@ class App extends Component {
   };
 
   rendersPosts = () => {
-    console.log("render posts");
     let posts_render = [];
-    for (let key in this.posts) {
-      let post = this.posts[key];
+    for (let key in this.state.posts) {
+      let post = this.state.posts[key];
       posts_render.push(<Post key={key} post={post} />);
     }
-    return posts_render;
+    return posts_render.reverse();
   };
 
   toDataUrl = (url, callback) => {
@@ -118,12 +144,19 @@ class App extends Component {
   };
 
   render() {
+    let active = this.state.loading;
     return (
       <div>
         {this.rendersPosts()}
         <div className="new-post" onClick={this.newPost}>
           +
         </div>
+        <LoadingOverlay
+          active={active}
+          spinner
+          text="Loading your content..."
+        >
+        </LoadingOverlay>
       </div>
     );
   }
