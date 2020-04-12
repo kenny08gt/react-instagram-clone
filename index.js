@@ -17,7 +17,7 @@ class App extends Component {
   getInitData = () => {
     this.setState({
       loading: true
-    })
+    });
     let posts = [];
     const posts_ref = firebase.database().ref("posts");
     posts_ref.on("value", snapshot => {
@@ -38,7 +38,7 @@ class App extends Component {
     // console.log("hey new post!");
     this.setState({
       loading: true
-    })
+    });
     const that = this;
     const storage = firebase.storage();
     let dateToInsert = new Date().getTime();
@@ -49,7 +49,7 @@ class App extends Component {
     var storageRef = storage.ref("posts/" + dateToInsert + ".jpeg");
     // console.log(storageRef);
 
-    this.toDataUrl("https://picsum.photos/200/300", result => {
+    this.toDataUrl("https://picsum.photos/1200/1200", result => {
       // console.log(result);
       let uploadTask = storageRef.putString(result);
 
@@ -74,7 +74,7 @@ class App extends Component {
           // https://firebase.google.com/docs/storage/web/handle-errors
           that.setState({
             loading: false
-          })
+          });
           switch (error.code) {
             case "storage/unauthorized":
               // User doesn't have permission to access the object
@@ -110,9 +110,9 @@ class App extends Component {
                 // that.setState({
                 //   posts = posts
                 // })
-                that.setState({
+                this.setState({
                   loading: false
-                })
+                });
               });
           });
         }
@@ -151,12 +151,7 @@ class App extends Component {
         <div className="new-post" onClick={this.newPost}>
           +
         </div>
-        <LoadingOverlay
-          active={active}
-          spinner
-          text="Loading your content..."
-        >
-        </LoadingOverlay>
+        <LoadingOverlay active={active} text="Loading your content..." />
       </div>
     );
   }

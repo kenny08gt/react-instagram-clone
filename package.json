@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@emotion/core": "10.0.28",
-    "@firebase/app": "0.6.1",
-    "dotenv": "8.2.0",
-    "firebase": "7.14.0",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "@emotion/core": "^10.0.28",
+    "@firebase/app": "^0.6.1",
+    "dotenv": "^8.2.0",
+    "firebase": "^7.14.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-loading-overlay": "^1.0.1"
   },
   "scripts": {
