@@ -16,7 +16,7 @@ class App extends Component {
     const posts_ref = firebase.database().ref('posts');
     posts_ref.on('value', (snapshot) => {
       let items = snapshot.val();
-      console.log(items);
+      console.log(items); 
       for(let item in items) {
         let post = items[item];
         posts.push(post);
@@ -30,7 +30,7 @@ class App extends Component {
     let posts_render = [];
     for (let key in this.posts) {
       let post = this.posts[key];
-      posts_render.push(<Post post={post} />);
+      posts_render.push(<Post post={post} />); 
     }
     return posts_render;
   };

@@ -1,13 +1,12 @@
 import firebase from 'firebase'
 let firebaseConfig = {
-    apiKey: "AIzaSyDPOdN7fpRkwmzz_BY0JocwgDH3ulJ21Vc",
-    authDomain: "insta-clone-a1b31.firebaseapp.com",
-    databaseURL: "https://insta-clone-a1b31.firebaseio.com",
-    projectId: "insta-clone-a1b31",
-    storageBucket: "insta-clone-a1b31.appspot.com",
-    messagingSenderId: "1030046373896",
-    appId: "1:1030046373896:web:dcbb8ebabc5607213dd9bd",
-    measurementId: "G-925BZDV769"
+    apiKey: "AIzaSyBAbQHRExvChEGhcpi8eNaZkWHw6QJJk8M",
+    authDomain: "insta-clone-794b5.firebaseapp.com",
+    databaseURL: "https://insta-clone-794b5.firebaseio.com",
+    projectId: "insta-clone-794b5",
+    storageBucket: "insta-clone-794b5.appspot.com",
+    messagingSenderId: "307950994284",
+    appId: "1:307950994284:web:a9e8a8583d956cc5cae949"
   };
 firebase.initializeApp(firebaseConfig);
 export default firebase; 

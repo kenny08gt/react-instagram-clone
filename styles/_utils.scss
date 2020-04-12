@@ -1,0 +1,36 @@
+@for $i from 0 to 8 {
+  .ml-#{$i * 0.5} {
+    margin-left: #{$i * 0.5}em;
+  }
+  .mr-#{$i * 0.5} {
+    margin-right: #{$i * 0.5}em;
+  }
+  .mt-#{$i * 0.5} {
+    margin-top: #{$i * 0.5}em;
+  }
+  .mb-#{$i * 0.5} {
+    margin-bottom: #{$i * 0.5}em;
+  }
+  .m-#{$i * 0.5} {
+    margin: #{$i * 0.5}em;
+  }
+  .pl-#{$i * 0.5} {
+    padding-left: #{$i * 0.5}em;
+  }
+  .pr-#{$i * 0.5} {
+    padding-right: #{$i * 0.5}em;
+  }
+  .pt-#{$i * 0.5} {
+    padding-top: #{$i * 0.5}em;
+  }
+  .pb-#{$i * 0.5} {
+    padding-bottom: #{$i * 0.5}em;
+  }
+  .p-#{$i * 0.5} {
+    padding: #{$i * 0.5}em;
+  }
+}
+
+.d-flex {
+  display: flex;
+}
