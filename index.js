@@ -12,11 +12,20 @@ class App extends Component {
       posts: [],
       loading: false
     };
+
+    const posts_ref = firebase.database().ref("posts");
+
+    posts_ref.on("child_changed", function(snapshot) {
+      var changedPost = snapshot.val();
+      console.log("The updated post title is " + changedPost.post.title);
+      console.log(changedPost)
+    });
   }
 
   getInitData = () => {
     this.setState({
-      loading: true
+      loading: true,
+      posts: []
     });
     let posts = [];
     const posts_ref = firebase.database().ref("posts");
@@ -24,6 +33,7 @@ class App extends Component {
       let items = snapshot.val();
       for (let item in items) {
         let post = items[item];
+        post.post.id = item;
         posts.push(post.post);
       }
 
@@ -31,7 +41,11 @@ class App extends Component {
         posts: posts,
         loading: false
       });
+
+    console.log('getinitdate2');
     });
+
+    console.log('getinitdate3');
   };
 
   newPost = () => {
@@ -110,7 +124,7 @@ class App extends Component {
                 // that.setState({
                 //   posts = posts
                 // })
-                this.setState({
+                that.setState({
                   loading: false
                 });
               });

@@ -6,7 +6,9 @@ export default class Post extends Component {
   constructor(props) {
     super();
     this.state = { 
-      url: props.post.image
+      url: props.post.image,
+      id: props.post.id,
+      show: true,
     };
 
     this.dowloadImage(props.post.image);
@@ -26,7 +28,21 @@ export default class Post extends Component {
     request.send();
   };
 
+  delete = () => {
+    let post = firebase.database().ref("posts/" + this.state.id);
+    const that = this;
+    post.remove().then(() => {
+      that.setState({
+        show: false
+      })
+    })
+    console.log('end of delete');
+  }
+
   render() {
+    if(!this.state.show)
+      return false;
+
     let post = this.props.post;
     let url = this.state.url;
     return (
@@ -36,7 +52,9 @@ export default class Post extends Component {
           className="main-image"
           style={{ backgroundImage: `url(${url})` }}
         />
-        <hr />
+        <div className='controls'>
+          <button className='btn' onClick={this.delete}>Hide 🚫</button>
+        </div>
       </div>
     );
   }

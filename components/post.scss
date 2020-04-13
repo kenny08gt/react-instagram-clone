@@ -4,17 +4,22 @@
   width: 616px;
   margin: auto;
   margin-bottom: 60px;
-  padding: 20px;
   border: 1px solid rgba(219,219,219,1);
   h2 {
     font-size: 18px;
+     padding: 20px;
   }
   .main-image {
     background-size: cover;
     height: 285px;
-    width: 100%;
     background-position: center;
     background-origin: center;
     background-color: #adadad;
+    margin: 20px;
+  }
+  .controls {
+    margin-top: 20px;
+    border-top: 1px solid rgba(239,239,239,1);
+    padding: 20px;
   }
 }
